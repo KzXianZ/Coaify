@@ -1,9 +1,0 @@
-version: '3.9'
-
-services:
-  coaify-frontend:
-    build: .
-    container_name: coaify_frontend
-    ports:
-      - "3000:80"
-    restart: always
