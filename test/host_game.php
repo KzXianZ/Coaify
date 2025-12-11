@@ -35,7 +35,7 @@ body { font-family: Arial; margin: 0; }
 }
 .next-btn {
     position: absolute;
-    bottom: 80px; /* 往上移，避免與返回與登出重疊 */
+    bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
@@ -98,8 +98,11 @@ function updateNextBtn(){
 }
 function nextStep(){
     if(!selectedGame){ return; }
-    if(selectedGame==='test1'){ window.location.href='game_setup_test1.php'; }
-    else if(selectedGame==='test2'){ window.location.href='game_setup_test2.php'; }
+    if(selectedGame==='test1'){ 
+        window.location.href='game_setup_test1.php'; 
+    } else if(selectedGame==='test2'){ 
+        window.location.href='game_setup_test2.php'; 
+    }
 }
 function filterGames(){
     const input = document.getElementById('search').value.toLowerCase();

@@ -25,6 +25,7 @@ body { font-family: Arial; margin: 0; }
     padding: 15px;
     font-size: 16px;
     border-radius: 10px;
+    cursor: pointer;
 }
 .logout-btn {
     position: absolute;
@@ -55,6 +56,8 @@ body { font-family: Arial; margin: 0; }
 function logout(){ window.location.href='login.php'; }
 function switchToPlayer(){ window.location.href='player.php'; }
 function hostGame(){ window.location.href='host_game.php'; }
+function quizManage(){ window.location.href='quiz_manage.php'; }
+function records(){ window.location.href='records_host.php'; }
 </script>
 </head>
 <body>
@@ -65,10 +68,10 @@ function hostGame(){ window.location.href='host_game.php'; }
 
     <h2>出題者功能</h2>
     <button class="button" onclick="hostGame()">Host Game</button>
-    <form action="#"><input type="submit" class="button" value="Quiz Manage"></form>
-    <form action="#"><input type="submit" class="button" value="Records"></form>
+    <button class="button" onclick="quizManage()">Quiz Manage</button>
+    <button class="button" onclick="records()">Records</button>
 
-    <button class="logout-btn" onclick="logout()">Logout</button>
+    <button class="logout-btn" onclick="logout()">登出</button>
 </div>
 </body>
 </html>

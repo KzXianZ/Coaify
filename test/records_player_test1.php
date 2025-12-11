@@ -1,10 +1,10 @@
-<!-- pin.php -->
+<!-- records_player_test1.php -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>輸入PIN碼</title>
+<title>紀錄 - test2</title>
 <style>
 body { font-family: Arial; margin: 0; }
 .phone {
@@ -18,37 +18,33 @@ body { font-family: Arial; margin: 0; }
     box-sizing: border-box;
     text-align: center;
 }
-input[type=text], .start-btn, .back-btn {
-    display: block;
-    width: 80%;
-    margin: 10px auto;
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 12px;
-    border: 2px solid #333;
-}
-.start-btn, .back-btn {
-    cursor: pointer;
-    background-color: #5bc0de;
+.back-btn, .logout-btn {
+    position: absolute;
+    bottom: 20px;
+    padding: 10px 20px;
     color: white;
     border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.back-btn { left: 20px; background-color: #5bc0de; }
+.logout-btn { right: 20px; background-color: #d9534f; }
+.content {
+    margin-top: 200px;
+    font-size: 24px;
+    font-weight: bold;
 }
 </style>
 <script>
-function startGame(){
-    window.location.href = 'room.php';
-}
-function goBack(){
-    window.location.href = 'index.php';
-}
+function goBack(){ window.history.back(); }
+function logout(){ window.location.href='login.php'; }
 </script>
 </head>
 <body>
 <div class="phone">
-    <h2>請輸入PIN碼</h2>
-    <input type="text" placeholder="輸入PIN碼 (模擬)">
-    <button class="start-btn" onclick="startGame()">開始</button>
+    <div class="content">待放</div>
     <button class="back-btn" onclick="goBack()">返回</button>
+    <button class="logout-btn" onclick="logout()">登出</button>
 </div>
 </body>
 </html>

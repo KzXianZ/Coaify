@@ -26,7 +26,7 @@
 <input type="submit" value="忘記密碼">
 </form>
 <br><br>
-<input type="button" value="返回" onclick="history.back()">
+<input type="button" value="返回" onclick="window.location.href='index.php'">
 
 
 <p id="loginMsg" style="color:red"></p>
