@@ -1,4 +1,23 @@
 <!-- home.php (出題者預設) -->
+
+<?php
+// ===========================================
+// 1. Session 檢查與存取控制 (Access Control)
+// ===========================================
+session_start();
+
+
+// 檢查登入狀態
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    // 狀況 A: 未登入 -> 導向登入頁
+    header('Location: login.php');
+    exit();
+}
+
+
+// 通過所有檢查，頁面將繼續載入
+?>
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -53,7 +72,9 @@ body { font-family: Arial; margin: 0; }
 }
 </style>
 <script>
-function logout(){ window.location.href='login.php'; }
+function logout(){ 
+    window.location.href='login.php?action=logout'; 
+}
 function switchToPlayer(){ window.location.href='player.php'; }
 function hostGame(){ window.location.href='host_game.php'; }
 function quizManage(){ window.location.href='quiz_manage.php'; }

@@ -1,4 +1,19 @@
-<!-- player.php (答題者預設) -->
+
+<?php
+
+session_start();
+
+// 檢查使用者是否已登入
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    // 未登入，導向登入頁面
+    header('Location: login.php');
+    exit();
+} else {
+
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -53,7 +68,9 @@ body { font-family: Arial; margin: 0; }
 }
 </style>
 <script>
-function logout(){ window.location.href='login.php'; }
+function logout(){ 
+    window.location.href='login.php?action=logout'; 
+}
 function switchToHome(){ window.location.href='home.php'; }
 function goToPin(){ window.location.href='pin.php'; }
 function goToQRCode(){ window.location.href='qrcode.php'; }

@@ -39,7 +39,7 @@ function startGame(){
     window.location.href = 'room.php';
 }
 function goBack(){
-    window.location.href = 'index.php';
+    window.location.href = 'player.php';
 }
 </script>
 </head>

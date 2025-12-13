@@ -1,3 +1,18 @@
+<?php
+// ===========================================
+// 1. Session 檢查與啟動
+// ===========================================
+session_start();
+
+// 檢查使用者是否已登入
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    header("Location: home.php");
+    exit();
+}
+?>
+
+
+
 <!-- index.php -->
 <?php /* 首頁 - 只有三個按鈕 */ ?>
 <!DOCTYPE html>
