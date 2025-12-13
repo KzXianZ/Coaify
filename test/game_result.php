@@ -78,8 +78,8 @@ function goPlayerHome(){
     <?php
     } else {
     ?>
-        <button class="action-btn" onclick="goRegister()">註冊</button>
-        <button class="action-btn" onclick="goLogin()">登入</button>
+        <button class="action-btn" onclick="goRegister()">註冊並儲存</button>
+        <button class="action-btn" onclick="goLogin()">登入並儲存</button>
         <button class="action-btn" onclick="goIndex()">離開</button>
     <?php
     }
