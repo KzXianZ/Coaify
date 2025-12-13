@@ -107,7 +107,7 @@ input[type=number] {
 <script>
 let selectedMode = null;
 let currentPlayers = 0;
-function logout(){ window.location.href='login.php'; }
+function logout(){ window.location.href='login.php?action=logout'; }
 function goBack(){ window.history.back(); }
 function selectMode(btn, mode){
     if(selectedMode===mode){

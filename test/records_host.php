@@ -52,7 +52,7 @@ body { font-family: Arial; margin: 0; }
 </style>
 <script>
 function goBack(){ window.history.back(); }
-function logout(){ window.location.href='login.php'; }
+function logout(){ window.location.href='login.php?action=logout'; }
 function goToRecord(record){
     window.location.href = 'records_host_' + record + '.php';
 }

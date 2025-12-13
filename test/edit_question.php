@@ -82,7 +82,9 @@ body { font-family: Arial; margin: 0; }
 </style>
 <script>
 function goBack(){ window.history.back(); }
-function logout(){ window.location.href='login.php'; }
+function logout(){ 
+    window.location.href='login.php?action=logout'; 
+}
 
 // 根據題目類型顯示/隱藏對應的輸入欄位，並更新按鈕文字
 function toggleQuestionFields() {

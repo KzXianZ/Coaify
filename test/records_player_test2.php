@@ -37,7 +37,7 @@ body { font-family: Arial; margin: 0; }
 </style>
 <script>
 function goBack(){ window.history.back(); }
-function logout(){ window.location.href='login.php'; }
+function logout(){ window.location.href='login.php?action=logout'; }
 </script>
 </head>
 <body>

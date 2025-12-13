@@ -75,7 +75,8 @@ body { font-family: Arial; margin: 0; }
 </style>
 <script>
 let selectedGame = null;
-function logout(){ window.location.href='login.php'; }
+function logout(){ 
+    window.location.href='login.php?action=logout'; }
 function goBack(){ window.location.href='home.php'; }
 function selectGame(btn, gameName){
     if(selectedGame===gameName){

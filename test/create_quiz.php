@@ -59,7 +59,9 @@ button.save-btn {
 </style>
 <script>
 function goBack(){ window.history.back(); }
-function logout(){ window.location.href='login.php'; }
+function logout(){ 
+    window.location.href='login.php?action=logout'; 
+}
 function saveQuiz(){
     const name = document.getElementById('quizName').value;
     if(!name){ alert('請輸入題庫名稱'); return; }

@@ -4,6 +4,23 @@
 // ===========================================
 session_start();
 
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    // 執行 Session 銷毀
+    $_SESSION = array();
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
+    }
+    session_destroy();
+    
+    // 清除 Session 後，重新導向到不帶參數的 index.php，避免重複銷毀
+    header('Location: index.php');
+    exit();
+}
+
 // 檢查使用者是否已登入
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header("Location: home.php");

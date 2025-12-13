@@ -17,7 +17,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     session_destroy();
     
     // 導回 index.php
-    header('Location: index.php');
+    header('Location: login.php');
     exit();
 }
 // ===================================
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
 
-    if ($account === 'admin' && $password === '123') {
+    if ($account === 'user' && $password === '123') {
         
         // 驗證成功，設定 Session 狀態
         $_SESSION['logged_in'] = true;
@@ -46,6 +46,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // $_SESSION['user_role'] = 'player';
         
         header('Location:home.php');
+        exit(); // 終止腳本
+        
+    } else {
+        // 登入失敗
+        $error_message = '帳號或密碼錯誤。';
+    }
+
+    if ($account === 'admin' && $password === 'pass') {
+        
+        // 驗證成功，設定 Session 狀態
+        $_SESSION['logged_in'] = true;
+        // 建議同時設置其他識別資訊，如 user_id 或 role
+        // $_SESSION['user_id'] = 1; 
+        // $_SESSION['user_role'] = 'player';
+        
+        header('Location:admin.php');
         exit(); // 終止腳本
         
     } else {
