@@ -42,10 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // 驗證成功，設定 Session 狀態
         $_SESSION['logged_in'] = true;
         // 建議同時設置其他識別資訊，如 user_id 或 role
-        $_SESSION['user_id'] = 1; 
-        $_SESSION['user_role'] = 'player';
+        // $_SESSION['user_id'] = 1; 
+        // $_SESSION['user_role'] = 'player';
         
-        // 導向登入後的第一頁 (例如：player.php)
         header('Location:home.php');
         exit(); // 終止腳本
         
