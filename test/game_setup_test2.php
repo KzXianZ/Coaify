@@ -1,4 +1,3 @@
-<!-- game_setup_test2.php -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -6,18 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Test2 遊戲設定</title>
 <style>
-body { font-family: Arial; margin: 0; }
+/* 1. BODY 保持簡潔 */
+body { 
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    background-color: #f0f0f0; /* 整個網頁的淺色背景 */
+    color: #333;
+}
+
+/* 2. PHONE 容器應用背景圖片 */
 .phone {
     width: 380px;
     height: 700px;
     margin: 20px auto;
-    border: 2px solid #333;
-    border-radius: 20px;
+    
+    /* ==== 主要修改點：背景圖片應用於此 ==== */
+    background-image: url('S__1130501.jpg'); /* 圖片路徑 */
+    background-size: cover; /* 讓背景圖片覆蓋整個手機螢幕區域 */
+    background-repeat: no-repeat;
+    background-position: center; 
+    
+    /* 模擬手機邊框 */
+    border: 10px solid #000; 
+    border-radius: 25px; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+    
+    /* 內容設定 */
     position: relative;
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
+    color: #ffffff; /* 確保文字在圖片背景上清晰可見 */
 }
+
+/* 調整標題和文字可讀性 */
+h2 {
+    background-color: rgba(0, 0, 0, 0.6); 
+    padding: 10px;
+    border-radius: 8px;
+}
+.pin-code, .players-count {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 設置輸入框/選擇器/按鈕的樣式以配合深色背景 */
+input[type=number], .select-difficulty {
+    width: 80%;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 12px;
+    border: 2px solid #fff; /* 白色邊框 */
+    margin: 10px auto;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.9); /* 淺色半透明背景 */
+    color: #333;
+}
+
 .setting-btn {
     display: block;
     width: 80%;
@@ -26,21 +74,17 @@ body { font-family: Arial; margin: 0; }
     font-size: 16px;
     border-radius: 12px;
     cursor: pointer;
-    border: 2px solid #333;
-    background-color: #f8f8f8;
+    border: 2px solid #fff;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
 }
 .setting-btn.selected {
     background-color: #5bc0de;
     color: white;
+    border: 2px solid #fff;
 }
-.select-difficulty {
-    width: 80%;
-    padding: 15px;
-    margin: 10px auto;
-    font-size: 16px;
-    border-radius: 12px;
-    border: 2px solid #333;
-}
+
+/* Host/Start 按鈕 */
 .host-btn, .start-btn {
     position: absolute;
     bottom: 120px;
@@ -51,7 +95,12 @@ body { font-family: Arial; margin: 0; }
     font-size: 16px;
     border-radius: 10px;
     cursor: pointer;
+    background: #5cb85c; /* 綠色 */
+    color: white;
+    border: 2px solid #fff;
 }
+
+/* 登出/返回 按鈕 */
 .logout-btn {
     position: absolute;
     bottom: 20px;
@@ -74,26 +123,21 @@ body { font-family: Arial; margin: 0; }
     border-radius: 10px;
     cursor: pointer;
 }
-input[type=number] {
-    width: 80%;
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 12px;
-    border: 2px solid #333;
-    margin: 10px auto;
-    display: block;
-}
+
+/* QR Code 區域 */
 .qr-container {
     width: 200px;
     height: 200px;
     margin: 20px auto;
-    border: 2px solid #333;
+    border: 2px solid #fff; /* 白色邊框 */
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    background-color: #eee;
+    background-color: rgba(255, 255, 255, 0.9); /* 淺色背景模擬 QR 碼區域 */
+    color: #333; /* 確保 QR 碼文字清晰 */
 }
+
 .pin-code {
     font-size: 24px;
     margin: 10px 0;
