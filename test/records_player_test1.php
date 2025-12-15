@@ -1,4 +1,5 @@
-<!-- records_player_test1.php -->
+<!-- records_host_test2.php -->
+ <!-- 這裡放第二張圖 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
