@@ -147,8 +147,8 @@ h2 {
 
 </style>
 <script>
-function logout(){
-    window.location.href='login.php';
+function logout(){ 
+    window.location.href='login.php?action=logout'; 
 }
 function switchToPlayer(){ window.location.href='player.php'; }
 function hostGame(){ window.location.href='host_game.php'; }
