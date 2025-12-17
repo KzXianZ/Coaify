@@ -225,15 +225,20 @@ function goToRecord(record){
     window.location.href = 'records_host_' + record + '.php';
 }
 
-// 4. 搜尋功能
+// 4. ★★★ 強化版搜尋功能 ★★★
 function filterRecords(){
-    const search = document.getElementById('search').value.toLowerCase();
+    // 取得輸入值：轉小寫、並使用 replace(/\s+/g, '') 移除所有空白
+    const search = document.getElementById('search').value.toLowerCase().replace(/\s+/g, '');
+    
     document.querySelectorAll('.record-card').forEach(card => {
-        const title = card.querySelector('.r-title').innerText.toLowerCase();
+        // 取得標題：轉小寫、同樣移除所有空白
+        const title = card.querySelector('.r-title').innerText.toLowerCase().replace(/\s+/g, '');
+        
+        // 這樣輸入 "test1" 就會等於 "test1" (原本是 "TEST 1")
         if(title.includes(search)){
-            card.style.display='flex';
+            card.style.display = 'flex'; 
         } else {
-            card.style.display='none';
+            card.style.display = 'none'; 
         }
     });
 }
