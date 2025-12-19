@@ -51,12 +51,12 @@
   /* 題目列表大區 */
   .panel{
     position:absolute;
-    top:90px;
-    left:25px;
-    width:310px;
-    height:510px;
+    top:155px;
+    left:37px;
+    width:285px;
+    height:400px;
     box-sizing:border-box;
-    padding-top:20px;
+    padding-top:2px;
   }
 
   .quiz-title{
@@ -65,14 +65,14 @@
     color:#2a4ea0;
     font-size:18px;
     letter-spacing:2px;
-    margin-bottom:20px;
+    margin-bottom:5px;
   }
 
   .record-card{
     width:100%;
-    height:78px;
+    height:61.55px;
     background:#fff;
-    margin-bottom:20px;
+    margin-bottom:28px;
     padding:6px 12px;
     box-sizing:border-box;
   }
@@ -101,15 +101,15 @@
   /* 下方左右箭頭 */
   .nav-arrow{
     position:absolute;
-    width:53px;
-    height:53px;
+    width:42px;
+    height:42px;
     border:0;
-    background:url("records_player_arrow.png") center/contain no-repeat;
+    background:url("back_arrow.png") center/contain no-repeat;
     cursor:pointer;
   }
 
-  .left-nav{ left:90px; bottom:105px; transform:rotate(180deg); }
-  .right-nav{ right:90px; bottom:105px; }
+  .left-nav{ left:200px; bottom:160px; }
+  .right-nav{ right:50px; bottom:160px; transform:rotate(180deg); }
 
 </style>
 
@@ -134,7 +134,7 @@
   <!-- 面板 -->
   <div class="panel">
 
-    <div class="quiz-title">SAD QUIZ-1 (72/100)</div>
+    <div class="quiz-title"> </div>
 
     <div class="record-card">
       <div class="q-title">
