@@ -1,18 +1,9 @@
 <?php
-
-// ===========================================
-// 1. Session 檢查與存取控制 (Access Control)
-// ===========================================
 session_start();
-
-// 檢查登入狀態
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    // 狀況 A: 未登入 -> 導向登入頁
     header('Location: login.php');
     exit();
 }
-
-// 通過所有檢查，頁面將繼續載入
 ?>
 
 <!DOCTYPE html>
@@ -21,135 +12,120 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>首頁 - 出題者</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
-/* 1. BODY 保持簡潔 */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f0f0f0; /* 整個網頁的淺色背景 */
-    color: #333;
+:root {
+    --pixel-blue: #7fa4d9;
+    --pixel-dark-blue: #5a82bc;
+    --pixel-light-blue: #d4f4fe;
 }
 
-/* 2. PHONE 容器應用背景圖片 */
+body {
+    margin: 0;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Press Start 2P', cursive, "Microsoft JhengHei", sans-serif;
+}
+
 .phone {
-    width: 380px;
-    height: 700px;
-    margin: 20px auto;
-    
-    /* 背景圖片設定 */
-    background-image: url('home.png'); 
+    width: 375px;
+    height: 667px;
+    background-image: url('S__1130501.jpg'); 
     background-size: cover; 
     background-repeat: no-repeat;
     background-position: center;
-    
-    /* 模擬手機邊框 */
     border: 10px solid #000;
     border-radius: 25px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    
-    /* 內容設定 */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     position: relative;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-    color: #ffffff; 
-    
-    /* 使用 Flexbox 垂直排列內容 */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center; 
 }
 
-/* 3. 調整標題可讀性 */
-h2 {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 50px; 
+.logout-top {
+    text-align: right;
+    padding: 10px 15px;
 }
-
-/* 4. 內容按鈕 (Host Game, Quiz Manage, Records) */
-.button {
-    display: block;
-    width: 80%;
-    
-    /* 按鈕間距 */
-    margin: 10px auto; 
-    
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 10px;
+.logout-top a {
+    color: var(--pixel-dark-blue);
+    font-size: 10px;
+    text-decoration: underline;
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.9); 
-    color: #333;
-    border: 2px solid #fff;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* 5. 切換按鈕 (出題者/答題者) - 橫向並排 */
-.switch-container {
-    display: flex; 
-    width: 90%; 
-    justify-content: center;
-    
-    /* 往下移動間距 */
-    margin-top: 40px; 
-    
-    margin-bottom: 20px;
+.tab-container {
+    display: flex;
+    margin-left: 20px;
+    align-items: flex-end;
 }
 
-.switch-btn {
-    display: block;
-    flex-grow: 1; 
-    
-    /* **** 基礎設定：先設定文字置中 **** */
-    text-align: center; 
-    padding: 10px; 
-    
+.tab {
+    padding: 12px 15px;
     font-size: 14px;
-    border-radius: 8px;
+    border-radius: 12px 12px 0 0;
     cursor: pointer;
-    
-    background-color: transparent; 
-    border: none; 
-    
-    color: #000; 
-}
-
-/* ** 新增：針對第一個按鈕 (出題者) 進行靠左對齊 ** */
-.switch-btn:first-child {
-    text-align: left; /* 文字靠左對齊 */
-    /* 調整內邊距：左側增加到 20px，將文字往右推，達到往左邊偏移的效果 */
-    padding: 10px 10px 10px 20px; 
-}
-
-
-.switch-btn.disabled {
-    background-color: transparent; 
-    cursor: default;
-    border: none; 
-    color: #000; 
-}
-
-/* 6. 登出按鈕 - 接在 Records 底下 */
-.logout-btn {
-    /* 移除絕對定位 */
-    margin-top: 15px; 
-    width: 80%; 
-    padding: 10px 20px;
-    background: #d9534f; /* 紅色 */
-    color: white;
     border: none;
-    border-radius: 10px;
-    cursor: pointer;
+    font-family: inherit;
 }
 
+.tab-active {
+    background-color: var(--pixel-blue);
+    color: white;
+    z-index: 2;
+}
+
+.tab-inactive {
+    background-color: #b8cde8;
+    color: var(--pixel-dark-blue);
+    font-size: 10px;
+    padding: 8px 12px;
+    margin-left: -5px;
+    z-index: 1;
+}
+
+/* 調整過的藍色面板 */
+.main-panel {
+    background-color: var(--pixel-blue);
+    margin: 0 20px;
+    flex-grow: 0;
+    padding: 60px 15px; /* 增加上下間距讓框框變長 */
+    border-radius: 0 15px 15px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px; /* 增加按鈕之間的間距 */
+    align-items: center;
+}
+
+.pixel-button {
+    width: 90%;
+    background-color: var(--pixel-light-blue);
+    border: 4px solid var(--pixel-dark-blue);
+    box-shadow: inset -4px -4px 0px 0px #adcdec, 
+                inset 4px 4px 0px 0px #ffffff;
+    padding: 15px 0;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    color: var(--pixel-dark-blue);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: transform 0.1s;
+}
+
+.pixel-button:active {
+    transform: scale(0.98);
+    box-shadow: inset 4px 4px 0px 0px #adcdec;
+}
+
+.pixel-button:focus {
+    outline: none;
+}
 </style>
 <script>
-function logout(){ 
-    window.location.href='login.php?action=logout'; 
-}
+function logout(){ window.location.href='login.php?action=logout'; }
 function switchToPlayer(){ window.location.href='player.php'; }
 function hostGame(){ window.location.href='host_game.php'; }
 function quizManage(){ window.location.href='quiz_manage.php'; }
@@ -157,20 +133,23 @@ function records(){ window.location.href='records_host.php'; }
 </script>
 </head>
 <body>
-<div class="phone">
 
-    <div class="switch-container">
-        <button class="switch-btn disabled">出題者</button> 
-        <button class="switch-btn" onclick="switchToPlayer()">答題者</button> 
+<div class="phone">
+    <div class="logout-top">
+        <a onclick="logout()">LOGOUT</a>
     </div>
 
-    
-    <button class="button" onclick="hostGame()">Host Game</button>
-    <button class="button" onclick="quizManage()">Quiz Manage</button>
-    <button class="button" onclick="records()">Records</button>
+    <div class="tab-container">
+        <div class="tab tab-active">出 題 者</div>
+        <div class="tab tab-inactive" onclick="switchToPlayer()">答 題 者</div>
+    </div>
 
-    <button class="logout-btn" onclick="logout()">登出</button>
-
+    <div class="main-panel">
+        <button class="pixel-button" onclick="hostGame()">Host Game</button>
+        <button class="pixel-button" onclick="quizManage()">Quiz Manage</button>
+        <button class="pixel-button" onclick="records()">Records</button>
+    </div>
 </div>
+
 </body>
 </html>
