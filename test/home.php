@@ -27,7 +27,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: 'Press Start 2P', cursive, "Microsoft JhengHei", sans-serif;
+    /* 設定全域中文字體為黑體系列 */
+    font-family: 'Press Start 2P', "微軟正黑體", "Microsoft JhengHei", sans-serif;
 }
 
 .phone {
@@ -55,6 +56,7 @@ body {
     font-size: 10px;
     text-decoration: underline;
     cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .tab-container {
@@ -63,13 +65,16 @@ body {
     align-items: flex-end;
 }
 
+/* 調整標籤文字大小與間距 */
 .tab {
-    padding: 12px 15px;
-    font-size: 14px;
+    padding: 12px 20px;
+    font-size: 18px; /* 加大字體 */
     border-radius: 12px 12px 0 0;
     cursor: pointer;
     border: none;
-    font-family: inherit;
+    font-family: "微軟正黑體", "Microsoft JhengHei", sans-serif; /* 確保中文套用黑體 */
+    font-weight: bold;
+    letter-spacing: 1px; /* 縮小字間距 */
 }
 
 .tab-active {
@@ -81,22 +86,21 @@ body {
 .tab-inactive {
     background-color: #b8cde8;
     color: var(--pixel-dark-blue);
-    font-size: 10px;
-    padding: 8px 12px;
+    font-size: 14px; /* 答題者字體也相對加大 */
+    padding: 8px 15px;
     margin-left: -5px;
     z-index: 1;
 }
 
-/* 調整過的藍色面板 */
 .main-panel {
     background-color: var(--pixel-blue);
     margin: 0 20px;
     flex-grow: 0;
-    padding: 60px 15px; /* 增加上下間距讓框框變長 */
+    padding: 60px 15px; 
     border-radius: 0 15px 15px 15px;
     display: flex;
     flex-direction: column;
-    gap: 35px; /* 增加按鈕之間的間距 */
+    gap: 35px; 
     align-items: center;
 }
 
@@ -107,12 +111,13 @@ body {
     box-shadow: inset -4px -4px 0px 0px #adcdec, 
                 inset 4px 4px 0px 0px #ffffff;
     padding: 15px 0;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', "微軟正黑體", sans-serif;
     font-size: 14px;
     color: var(--pixel-dark-blue);
     cursor: pointer;
     text-transform: uppercase;
     transition: transform 0.1s;
+    font-weight: bold;
 }
 
 .pixel-button:active {
@@ -140,8 +145,8 @@ function records(){ window.location.href='records_host.php'; }
     </div>
 
     <div class="tab-container">
-        <div class="tab tab-active">出 題 者</div>
-        <div class="tab tab-inactive" onclick="switchToPlayer()">答 題 者</div>
+        <div class="tab tab-active">出題者</div>
+        <div class="tab tab-inactive" onclick="switchToPlayer()">答題者</div>
     </div>
 
     <div class="main-panel">

@@ -17,7 +17,8 @@
             margin: 0;
             padding: 0;
             background-color: #f8f9fa; 
-            font-family: 'Press Start 2P', cursive, sans-serif;
+            /* 全域字體設定：英文像素風優先，中文使用黑體避開標楷體 */
+            font-family: 'Press Start 2P', "微軟正黑體", "Microsoft JhengHei", sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,17 +29,14 @@
             width: 380px;
             height: 700px;
             margin: 20px auto;
-            
-            /* ==== 背景圖片設定 ==== */
-            background-image: url('S__1130501.jpg'); /* 圖片路徑 */
-            background-size: cover; /* 讓背景圖片覆蓋整個手機螢幕區域 */
+            background-image: url('S__1130501.jpg'); 
+            background-size: cover; 
             background-repeat: no-repeat;
             background-position: center; 
-            
-            /* 模擬手機邊框 */
             border: 10px solid #000; 
             border-radius: 25px; 
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+            position: relative;
         }
 
         /* 頂部 LOGOUT */
@@ -52,9 +50,10 @@
             text-decoration: underline;
             cursor: pointer;
             letter-spacing: 1px;
+            font-family: 'Press Start 2P', cursive;
         }
 
-        /* 標籤頁佈局 */
+        /* 標籤頁佈局優化 - 加大字體並修正中文字體 */
         .tab-area {
             display: flex;
             align-items: flex-end;
@@ -64,17 +63,22 @@
         .tab-main {
             background-color: var(--pixel-blue);
             color: white;
-            padding: 12px 18px;
+            padding: 12px 20px;
             border-radius: 12px 12px 0 0;
-            font-size: 14px;
+            font-size: 18px; /* 加大字體 */
+            font-weight: bold;
+            letter-spacing: 1px;
+            /* 強制標籤中文不使用標楷體 */
+            font-family: "微軟正黑體", "Microsoft JhengHei", sans-serif;
         }
         .tab-sub {
             background-color: #b8cde8;
             color: #5a82bc;
-            padding: 8px 12px;
+            padding: 8px 15px;
             border-radius: 8px 8px 0 0;
-            font-size: 10px;
+            font-size: 14px; /* 加大字體 */
             margin-left: 5px;
+            font-weight: bold;
         }
 
         /* 主要藍色面板 */
@@ -101,6 +105,7 @@
             cursor: pointer;
             color: var(--pixel-dark-blue);
             font-size: 16px;
+            font-family: Arial, sans-serif;
         }
 
         /* 白色內容盒 */
@@ -116,14 +121,16 @@
             font-size: 14px;
             margin-bottom: 20px;
             display: block;
+            font-family: 'Press Start 2P', cursive;
         }
 
         .input-label {
             display: block;
             text-align: left;
             color: var(--pixel-dark-blue);
-            font-size: 8px;
+            font-size: 10px;
             margin-bottom: 8px;
+            font-weight: bold;
         }
 
         .pixel-input, .pixel-select {
@@ -131,7 +138,7 @@
             background-color: var(--pixel-light-blue);
             border: 3px solid var(--pixel-dark-blue);
             padding: 10px;
-            font-family: 'Press Start 2P';
+            font-family: 'Press Start 2P', "微軟正黑體", sans-serif;
             font-size: 10px;
             color: var(--pixel-dark-blue);
             box-sizing: border-box;
@@ -150,9 +157,10 @@
             border: 3px solid var(--pixel-dark-blue);
             padding: 10px 0;
             color: var(--pixel-dark-blue);
-            font-family: 'Press Start 2P';
+            font-family: 'Press Start 2P', cursive;
             font-size: 8px;
             cursor: pointer;
+            font-weight: bold;
         }
         .mode-btn.active {
             background-color: var(--pixel-dark-blue);
@@ -178,11 +186,12 @@
             border: 3px solid var(--pixel-dark-blue);
             padding: 15px;
             color: var(--pixel-dark-blue);
-            font-family: 'Press Start 2P';
+            font-family: 'Press Start 2P', cursive;
             font-size: 12px;
             width: 100%;
             cursor: pointer;
             box-shadow: 0 4px 0 #5a82bc;
+            font-weight: bold;
         }
         .host-btn-large:active {
             transform: translateY(2px);
@@ -207,11 +216,14 @@
             color: var(--pixel-dark-blue);
             margin: 10px 0;
             letter-spacing: 2px;
+            font-family: 'Press Start 2P', cursive;
         }
         .status-text {
-            font-size: 8px;
+            font-size: 11px; /* 加大狀態文字 */
             color: #666;
             margin-bottom: 5px;
+            font-weight: bold;
+            font-family: "微軟正黑體", sans-serif;
         }
     </style>
 </head>
@@ -223,7 +235,7 @@
     </div>
 
     <div class="tab-area">
-        <div class="tab-main">出 題 者</div>
+        <div class="tab-main">出題者</div>
         <div class="tab-sub">HOST GAME</div>
     </div>
 
@@ -270,12 +282,10 @@
     let selectedMode = '個人';
     let currentPlayers = 0;
 
-    // 功能 1: 登出跳轉 index.php
     function logout() {
         window.location.href = 'index.php';
     }
 
-    // 功能 2: 返回邏輯 (若在 QR 頁面先回設定頁)
     function goBack() {
         const setup = document.getElementById('setup-area');
         const qr = document.getElementById('qr-display');
@@ -287,14 +297,12 @@
         }
     }
 
-    // 功能 3: 模式選擇
     function selectMode(btn, mode) {
         document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         selectedMode = mode;
     }
 
-    // 功能 4: 產生遊戲 PIN
     function generateGame() {
         const playersInput = document.getElementById('players').value;
         if (!playersInput || playersInput <= 0) {
@@ -302,16 +310,13 @@
             return;
         }
 
-        // 切換顯示區塊
         document.getElementById('setup-area').style.display = 'none';
         document.getElementById('qr-display').style.display = 'block';
 
-        // 隨機 PIN
         const pin = Math.floor(100000 + Math.random() * 900000);
         document.getElementById('pin-code').innerText = pin;
     }
 
-    // 功能 5: 開始遊戲
     function startGame() {
         window.location.href = 'game_result_host.php';
     }
