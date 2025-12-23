@@ -5,7 +5,7 @@ session_start();
 // 檢查登入狀態
 $is_logged_in = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 
-// 假設這裡從 URL 參數或其他 Session 取得這次的遊戲結果
+// 假設這裡從 URL 參數或 Session 取得遊戲結果
 $score = 90; 
 $damage = 5500;
 $time = "1.8HR";
@@ -17,100 +17,113 @@ $time = "1.8HR";
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>遊戲結算</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
-/* 1. BODY 保持簡潔，只用於基本字體設定 */
-body { 
-    font-family: Arial, sans-serif; 
-    margin: 0; 
-    background-color: #f0f0f0; /* 給整個網頁一個淺色背景 */
-    color: #333;
+/* 1. 全域變數與字體設定 */
+:root {
+    --pixel-blue: #7fa4d9;
+    --pixel-dark-blue: #5a82bc;
+    --pixel-light-blue: #d4f4fe;
 }
 
-/* 2. PHONE 容器應用背景圖片，並使用 Flexbox 進行內容居中 */
+body { 
+    font-family: 'Press Start 2P', cursive, Arial, sans-serif; 
+    margin: 0; 
+    background-color: #f8f9fa; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 2. PHONE 容器：模擬手機邊框 */
 .phone {
-    width: 380px;
-    height: 700px;
-    margin: 20px auto;
-    
-    /* ==== 背景圖片設定 ==== */
-    background-image: url('game_result.png'); /* 圖片路徑 */
-    background-size: cover; /* 讓背景圖片覆蓋整個手機螢幕區域 */
+    width: 375px;
+    height: 667px;
+    background-image: url('game_result.png'); 
+    background-size: cover; 
     background-repeat: no-repeat;
     background-position: center; 
     
-    /* 模擬手機邊框 */
     border: 10px solid #000; 
-    border-radius: 25px; 
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+    border-radius: 40px; 
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5); 
     
-    /* 內容設定：使用 Flexbox 垂直居中主要內容 */
     position: relative;
-    padding: 20px;
+    padding: 40px 20px;
     box-sizing: border-box;
-    text-align: center;
-    color: #000; /* 確保文字在圖片背景上清晰可見 */
-    
-    /* Flexbox 佈局設定 */
     display: flex;
     flex-direction: column;
-    justify-content: center; /* 垂直居中 */
-    align-items: center; /* 水平居中 */
+    align-items: center;
+    overflow: hidden;
 }
 
-/* 遊戲結果標題和內容，移除半透明背景 */
-h2 {
-    font-size: 24px; /* 標題縮小 */
-    margin-bottom: 30px;
-    /* 移除 background-color 等半透明樣式 */
-}
-
-/* 用來包住所有結算資訊，以便於排版 */
+/* 3. 遊戲結算資訊文字區（移除框框，字體改為藍色並下移） */
 .result-container {
-    margin: 20px 0;
-    width: 100%; /* 確保容器寬度撐開 */
+    width: 90%;
+    margin-top: 120px; /* 文字位置往下一點 */
+    text-align: center;
+    background: none; 
+    border: none;
+}
+
+h2 {
+    color: var(--pixel-dark-blue); /* 字體改為藍色 */
+    font-size: 18px;
+    margin-bottom: 35px;
+    letter-spacing: 2px;
 }
 
 .result-item {
-    font-size: 16px; /* 字體縮小 */
-    margin: 10px auto; /* 保持垂直間距 */
-    /* 移除 background-color 等半透明樣式 */
+    font-size: 10px;
+    color: var(--pixel-dark-blue); /* 字體改為藍色 */
+    margin: 22px 0;
+    line-height: 1.5;
+}
+
+/* 4. 藍色像素按鈕 (保持原樣式) */
+.action-buttons {
+    margin-top: auto; 
+    margin-bottom: 50px;
+    width: 100%;
 }
 
 .action-btn {
     display: block;
-    width: 80%;
+    width: 90%;
     margin: 15px auto;
-    padding: 12px; /* 按鈕 padding 略微縮小 */
-    font-size: 15px; /* 按鈕字體略微縮小 */
-    border-radius: 12px;
+    padding: 15px 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
     cursor: pointer;
-    /* 調整按鈕樣式以確保在圖片背景上突出 */
-    border: 2px solid #fff; 
-    background-color: rgba(255, 255, 255, 0.9); /* 半透明白色按鈕 */
-    color: #333; /* 深色文字 */
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    
+    background-color: var(--pixel-light-blue); 
+    color: var(--pixel-dark-blue); 
+    
+    border: 4px solid var(--pixel-dark-blue);
+    box-shadow: inset -4px -4px 0px 0px #adcdec, 
+                inset 4px 4px 0px 0px #ffffff;
+    
+    text-transform: uppercase;
     transition: transform 0.1s;
 }
 
 .action-btn:active {
-    transform: scale(0.98); /* 點擊時縮小 */
+    transform: scale(0.95);
+    box-shadow: inset 4px 4px 0px 0px #adcdec;
 }
 
-/* 按鈕群組的容器，確保按鈕在畫面下方不被結果項目影響 */
-.action-buttons {
-    margin-top: 30px;
-    width: 100%;
+.action-btn:focus {
+    outline: none;
 }
+
 </style>
 <script>
-// 未登入時的動作
 function goRegister(){ window.location.href='register.php'; }
 function goLogin(){ window.location.href='login.php'; }
 function goIndex(){ window.location.href='index.php'; }
-// 已登入時的動作
 function saveRecordAndGoHome(){
-    alert('成績已儲存！(模擬)'); 
+    alert('成績已儲存！'); 
     window.location.href='player.php';
 }
 function goPlayerHome(){
@@ -122,24 +135,24 @@ function goPlayerHome(){
 <div class="phone">
     
     <div class="result-container">
-        <h2>遊戲結算</h2>
-        <div class="result-item">分數: <?php echo htmlspecialchars($score); ?>/100</div>
-        <div class="result-item">對BOSS造成傷害量: <?php echo htmlspecialchars($damage); ?></div>
-        <div class="result-item">完成時間: <?php echo htmlspecialchars($time); ?></div>
+        <h2>CLEAR!</h2>
+        <div class="result-item">SCORE: <?php echo htmlspecialchars($score); ?>/100</div>
+        <div class="result-item">DMG TO BOSS: <?php echo htmlspecialchars($damage); ?></div>
+        <div class="result-item">TIME: <?php echo htmlspecialchars($time); ?></div>
     </div>
 
     <div class="action-buttons">
     <?php
     if ($is_logged_in) {
     ?>
-        <button class="action-btn" onclick="saveRecordAndGoHome()">儲存紀錄並返回</button>
-        <button class="action-btn" onclick="goPlayerHome()">返回主頁 (不儲存)</button>
+        <button class="action-btn" onclick="saveRecordAndGoHome()">SAVE & RETURN</button>
+        <button class="action-btn" onclick="goPlayerHome()">HOME (NO SAVE)</button>
     <?php
     } else {
     ?>
-        <button class="action-btn" onclick="goRegister()">註冊並儲存</button>
-        <button class="action-btn" onclick="goLogin()">登入並儲存</button>
-        <button class="action-btn" onclick="goIndex()">離開</button>
+        <button class="action-btn" onclick="goRegister()">REG & SAVE</button>
+        <button class="action-btn" onclick="goLogin()">LOGIN & SAVE</button>
+        <button class="action-btn" onclick="goIndex()">EXIT</button>
     <?php
     }
     ?>
