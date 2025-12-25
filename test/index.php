@@ -1,11 +1,7 @@
 <?php
-// ===========================================
-// 1. Session 檢查與啟動
-// ===========================================
 session_start();
 
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
-    // 執行 Session 銷毀
     $_SESSION = array();
     if (ini_get("session.use_cookies")) {
         $params = session_get_cookie_params();
@@ -15,61 +11,120 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
         );
     }
     session_destroy();
-    
-    // 清除 Session 後，重新導向到不帶參數的 index.php，避免重複銷毀
     header('Location: index.php');
     exit();
 }
 
-// 檢查使用者是否已登入
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header("Location: home.php");
     exit();
 }
 ?>
 
-
-
-<!-- index.php -->
-<?php /* 首頁 - 只有三個按鈕 */ ?>
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coaify - 首頁</title>
+    <style>
+        /* 1. 基礎設定與背景 */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffffff; /* 外圍背景色 */
+            font-family: 'Courier New', Courier, monospace; /* 模擬像素字體，如有特定字體檔案可更換 */
+        }
+
+        .phone-container {
+            width: 360px;
+            height: 640px;
+            background-image: url('index.png'); /* 使用您上傳的背景圖 */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border: 8px solid #222;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        /* 2. 標題樣式 (COAIFY) */
+        .title {
+            margin-top: 80px;
+            color: white;
+            font-size: 60px;
+            letter-spacing: 10px;
+            text-shadow: 4px 4px #000;
+            font-weight: bold;
+        }
+
+        /* 3. 按鈕容器 */
+        .button-group {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 80%;
+        }
+
+        /* 4. 自定義按鈕樣式 */
+        .pixel-button {
+            background-image: url('indexbottom.png'); /* 使用您上傳的按鈕底圖 */
+            background-size: 100% 100%;
+            background-color: transparent;
+            border: none;
+            height: 60px;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #4a8eb3; /* 根據圖片調整文字顏色 */
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            outline: none;
+            transition: transform 0.1s;
+        }
+
+        .pixel-button:active {
+            transform: scale(0.95); /* 點擊縮放效果 */
+        }
+
+        /* 移除預設 submit 樣式 */
+        form {
+            width: 100%;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-<center>
-    <!-- 模擬手機外框：使用 table 和寬高屬性（無 CSS） -->
-    <table width="360" height="720" border="1" cellpadding="0" cellspacing="0">
-        <tr>
-            <td valign="top">
-                <!-- 螢幕內容置中 -->
-                <table width="100%" height="100%">
-                    <tr>
-                        <td align="center" valign="middle">
-                            <h1>首頁</h1>
 
-                            <form action="login.php" method="get" style="display:inline">
-                                <input type="submit" value="註冊與登入">
-                            </form>
-                            <br><br>
+    <div class="phone-container">
+        <div class="title">COAIFY</div>
 
-                            <form action="qrcode.php" method="get" style="display:inline">
-                                <input type="submit" value="掃 QR Code">
-                            </form>
-                            <br><br>
+        <div class="button-group">
+            <form action="login.php" method="get">
+                <button type="submit" class="pixel-button">Login/Register</button>
+            </form>
 
-                            <form action="pin.php" method="get" style="display:inline">
-                                <input type="submit" value="輸入 PIN 碼">
-                            </form>
+            <form action="qrcode.php" method="get">
+                <button type="submit" class="pixel-button">Scan QR Code</button>
+            </form>
 
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</center>
+            <form action="pin.php" method="get">
+                <button type="submit" class="pixel-button">Enter PIN</button>
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>

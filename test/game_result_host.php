@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>遊戲結束 - Host</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
     /* 1. 基本設定 */
     body { 
-        font-family: Arial, sans-serif; 
+        font-family: 'Press Start 2P', cursive, Arial, sans-serif; 
         margin: 0; 
-        background-color: #f0f0f0; 
+        background-color: #f8f9fa; 
         color: #333;
         display: flex;
         justify-content: center;
@@ -19,8 +20,8 @@
 
     /* 2. PHONE 容器 */
     .phone {
-        width: 380px;
-        height: 700px;
+        width: 375px; /* 稍微調整寬度以更貼近標準比例 */
+        height: 667px;
         background-image: url('game_result_host.png'); 
         background-size: cover; 
         background-repeat: no-repeat;
@@ -38,27 +39,32 @@
         overflow: hidden; 
     }
 
-    /* 標題與文字裝飾 */
+    /* 狀態標題 */
     h2 {
-        background-color: rgba(0, 0, 0, 0.6); 
-        padding: 10px;
+        background-color: #7fa4d9; /* 配合藍色面板色調 */
+        padding: 15px;
         border-radius: 10px;
         margin-top: 20px;
+        font-size: 14px; /* 像素字體較大，需縮小 */
+        border: 4px solid #5a82bc;
     }
 
     .info-box {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #5a82bc;
         padding: 12px;
         margin: 20px auto;
+        border: 3px solid #5a82bc;
         border-radius: 8px;
-        width: fit-content;
-        max-width: 80%;
+        width: 80%;
+        font-size: 10px;
+        line-height: 1.6;
     }
 
-    /* 3. 按鈕容器：調整 bottom 數值即可改變高度 */
+    /* 3. 按鈕容器 */
     .bottom-container {
         position: absolute;
-        bottom: 150px; /* 從 80px 改為 150px，按鈕會往上移動 */
+        bottom: 150px; 
         left: 0;
         width: 100%;
         display: flex;
@@ -66,23 +72,31 @@
         align-items: center;
     }
 
+    /* 藍色像素風格按鈕 */
     .result-btn, .home-btn {
-        width: 80%;
-        padding: 18px;
-        font-size: 18px;
-        border-radius: 15px;
+        width: 85%;
+        padding: 15px 10px;
+        font-family: 'Press Start 2P', cursive; /* 使用像素字體 */
+        font-size: 12px; /* 配合字體調整大小 */
         cursor: pointer;
-        border: 2px solid #fff; 
-        background-color: rgba(255, 255, 255, 0.95); 
-        color: #333; 
-        font-weight: bold;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        transition: transform 0.1s, background-color 0.2s;
+        
+        /* 圖片中的藍色外框與背景 */
+        background-color: #d4f4fe; /* 淺藍色背景 */
+        color: #5a82bc; /* 藍色文字 */
+        
+        /* 雙層邊框效果：外框深藍，內框淺藍立體感 */
+        border: 4px solid #5a82bc;
+        box-shadow: inset -4px -4px 0px 0px #adcdec, 
+                    inset 4px 4px 0px 0px #ffffff;
+        
+        text-transform: uppercase;
+        transition: transform 0.1s;
+        margin-bottom: 10px;
     }
 
     .result-btn:active, .home-btn:active {
         transform: scale(0.95);
-        background-color: #ddd;
+        box-shadow: inset 4px 4px 0px 0px #adcdec; /* 點擊時的凹陷感 */
     }
 
 </style>
@@ -90,25 +104,25 @@
 <body>
 
 <div class="phone">
-    <h2 id="status-title">遊戲進行中</h2>
+    <h2 id="status-title">GAME ONGOING</h2>
 
     <div id="game-area">
-        <div class="info-box">已經過回合數 6/10</div>
+        <div class="info-box">ROUND 6/10</div>
     </div>
 
     <div id="end-area" style="display:none;">
-        <div class="info-box">遊戲已結束<br>資料會保存在歷史紀錄中</div>
+        <div class="info-box">GAME OVER<br>SAVED IN RECORDS</div>
     </div>
 
     <div class="bottom-container">
-        <button id="next-btn" class="result-btn" onclick="endGame()">推進到下個步驟(模擬)</button>
-        <button id="home-btn" class="home-btn" style="display:none;" onclick="goHome()">回首頁</button>
+        <button id="next-btn" class="result-btn" onclick="endGame()">NEXT STEP</button>
+        <button id="home-btn" class="home-btn" style="display:none;" onclick="goHome()">GO HOME</button>
     </div>
 </div>
 
 <script>
     function endGame(){
-        document.getElementById('status-title').innerText = "遊戲結束";
+        document.getElementById('status-title').innerText = "GAME OVER";
         document.getElementById('game-area').style.display = 'none';
         document.getElementById('end-area').style.display = 'block';
         document.getElementById('next-btn').style.display = 'none';
