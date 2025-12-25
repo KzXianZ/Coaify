@@ -15,7 +15,7 @@
     .phone-container {
         width: 360px;
         height: 640px;
-        background-image: url('create_game_bg.png'); 
+        background-image: url('background.png'); 
         background-size: 100% 100%;
         position: relative;
         border: 8px solid #222;
@@ -144,7 +144,11 @@
     <div class="logout-btn" onclick="location.href='login.php?action=logout'">LOGOUT</div>
 
     <div class="tab-group">
+<<<<<<< HEAD
         <div class="tab-text tab-host" onclick="location.href='host.php'"></div>
+=======
+        <div class="tab-text tab-host" onclick="location.href='host.php'">出 題 者</div>
+>>>>>>> 91820b63b362778a52c6105d2e0d75724a989f95
     </div>
 
     <div class="header-group">
