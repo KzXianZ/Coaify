@@ -176,7 +176,7 @@ $qr_api_url = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=2a
 
     <div class="white-card">
         <img src="<?php echo $qr_api_url; ?>" alt="QR Code" class="qr-img">
-        <div class="pin-code"><?php echo $game_pin; ?></div>
+        
     </div>
 
 </div>
