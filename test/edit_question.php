@@ -2,182 +2,220 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>編輯題目</title>
+
 <style>
-body { font-family: Arial; margin: 0; }
-.phone {
-    width: 380px;
-    height: 700px;
-    margin: 20px auto;
-    border: 2px solid #333;
-    border-radius: 20px;
-    position: relative;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-}
-.input-field {
-    width: 80%;
-    padding: 12px;
-    margin: 5px auto;
-    font-size: 16px;
-    border-radius: 12px;
-    border: 2px solid #333;
-    display: block;
-}
+  * { box-sizing: border-box; }
 
-.save-btn {
-    display: block;
-    width: 80%;
-    margin: 5px auto;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 12px;
-    cursor: pointer;
-    border: 2px solid #333;
-    background-color: #5cb85c;
-    color: white;
-}
-.back-btn, .logout-btn {
-    position: absolute;
-    bottom: 20px;
-    padding: 10px 20px;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-.back-btn { left: 20px; background-color: #5bc0de; }
-.logout-btn { right: 20px; background-color: #d9534f; }
-.choice-field {
-    display: none; 
-}
-.open-field-container {
-    display: block; 
-}
-
-.option-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    margin: 5px auto;
-}
-.option-row input[type="checkbox"] {
-    order: -1; 
-    width: 20px;
-    margin-right: 5px;
-    margin-left: 0;
-}
-.option-row input[type="text"] {
-    order: 0;
-    flex-grow: 1;
+  /* ✅ 容器外白色 */
+  body{
     margin: 0;
-    width: auto; 
-    border-radius: 12px; 
-}
+    background: #ffffff;
+    font-family: monospace;
+  }
+
+  /* ✅ 你指定的手機容器（完全照寫） */
+  .phone{
+    width:380px;
+    height:700px;
+    margin:20px auto;
+    border:2px solid #333;
+    border-radius:20px;
+    position:relative;
+    overflow:hidden;
+    box-sizing:border-box;
+  }
+
+  /* ✅ 背景圖完全貼合容器 */
+  .bg{
+    position:absolute;
+    inset:0; /* top/right/bottom/left = 0 */
+    background: url("edit_question_bg.png") no-repeat center;
+    background-size: 100% 100%; /* 完全貼滿 */
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* 左上返回 */
+  .back-top{
+    position:absolute;
+    top:110px;
+    left:50px;
+    width:44px;
+    height:44px;
+    background: url("back_arrow.png") no-repeat center;
+    background-size: contain;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    z-index: 5;
+    padding:0;
+    background-color: transparent; /* ✅ 避免白底 */
+  }
+  .back-top:focus{ outline:none; }
+
+  /* ✅ 表單：用「固定座標」對齊範例圖的框 */
+  .form-area{
+    position:absolute;
+    left:50%;
+    transform: translateX(-50%);
+    top: 228px;          /* 控制整個表單往上/下 */
+    width: 280px;        /* 讓框跟背景一致 */
+    z-index: 3;
+  }
+
+  /* 單一輸入框底圖 */
+  .input-wrap{
+    width: 280px;
+    height: 40px;
+    background: url("room_enter.png") no-repeat center;
+    background-size: 100% 100%;
+    margin: 0 auto 34px;   /* 各欄位間距（對齊背景的空隙） */
+    position: relative;
+  }
+
+  /* 疊上去的 input/select */
+  .input-wrap input,
+  .input-wrap select{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    font-family: monospace;
+    font-size: 15px;
+    color: #173a73;
+    padding: 0 34px 0 14px; /* 右邊留空給下拉箭頭 */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  /* ✅ 右側下拉箭頭（用 CSS 畫，位置固定貼右邊） */
+  .select-wrap::after{
+    content:"";
+    position:absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-30%);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 10px solid #173a73;
+    opacity: .85;
+    pointer-events:none;
+  }
+
+  /* ✅ 左右圓形箭頭（位置固定對齊草地上方） */
+  .nav-btn{
+    position:absolute;
+    bottom: 200px;   /* 草地上方那排 */
+    width: 60px;
+    height: 72px;
+    border:none;
+    outline:none;
+    background-color: transparent; /* ✅ 不要白底 */
+    padding:0;
+    cursor:pointer;
+    z-index: 4;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+  }
+  .nav-btn.prev{ left: 48px;  background-image:url("last_arrow.png"); }
+  .nav-btn.next{ right: 48px; background-image:url("next_arrow.png"); }
+  .nav-btn:focus{ outline:none; }
+
+  /* ✅ 底部 DELETE / SAVE（位置固定對齊最底下） */
+  .btn-img{
+    position:absolute;
+    bottom: 140px;  /* 最底下那排 */
+    width: 160px;
+    height: 40px;
+    border:none;
+    outline:none;
+    background-color: transparent; /* ✅ 不要白底 */
+    padding:0;
+    cursor:pointer;
+    z-index: 4;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+  }
+  .btn-delete{ left: 30px;  background-image:url("delete_button.png"); }
+  .btn-save{   right: 30px; background-image:url("save.png"); }
+  .btn-img:focus{ outline:none; }
+
+  /* 多選題（先保留，切換 type 才顯示） */
+  #choice-fields{ display:none; }
 
 </style>
+
 <script>
-function goBack(){ window.history.back(); }
-function logout(){ 
-    window.location.href='login.php?action=logout'; 
-}
+  function toggleType(){
+    const type = document.getElementById("question-type").value;
+    document.getElementById("open-fields").style.display = (type === "open") ? "block" : "none";
+    document.getElementById("choice-fields").style.display = (type === "choice") ? "block" : "none";
+  }
 
-// 根據題目類型顯示/隱藏對應的輸入欄位，並更新按鈕文字
-function toggleQuestionFields() {
-    const type = document.getElementById('question-type').value;
-    const choiceFields = document.getElementById('choice-fields');
-    const openFields = document.getElementById('open-fields');
-    const saveBtn = document.getElementById('save-button');
-    
-    if (type === 'choice') {
-        // 選擇題模式
-        openFields.style.display = 'none';      // 隱藏開放式問題的欄位
-        choiceFields.style.display = 'block';   // 顯示選擇題的選項欄位
-        saveBtn.textContent = '儲存選擇題'; 
-    } else { // open 
-        // 開放式問題模式 (預設)
-        openFields.style.display = 'block';     // 顯示開放式問題的欄位
-        choiceFields.style.display = 'none';    // 隱藏選擇題的選項欄位
-        saveBtn.textContent = '儲存開放式題目';
-    }
-}
+  function goBack(){ history.back(); }
 
-// 模擬儲存，返回上一頁
-function saveQuestion(){
-    const type = document.getElementById('question-type').value;
-    
-    // 模擬欄位驗證和儲存成功的提示
-    if (type === 'choice') {
-        alert('選擇題資料已儲存 (模擬)。');
-    } else {
-        alert('開放式題目資料已儲存 (模擬)。');
-    }
-    
-    // 模擬成功後返回上一頁
-    goBack();
-}
+  function prevStep(){ alert("上一題（模擬）"); }
+  function nextStep(){ alert("下一題（模擬）"); }
 
-// 頁面載入完成時執行初始化
-window.onload = function() {
-    // 1. 初始化欄位狀態 
-    toggleQuestionFields();
-    
-    // 2. 監聽下拉式選單的變化
-    document.getElementById('question-type').addEventListener('change', toggleQuestionFields);
-}
+  function deleteQuestion(){
+    if(confirm("確定要刪除？（模擬）")) alert("已刪除（模擬）");
+  }
+
+  function saveQuestion(){
+    alert("已儲存（模擬）");
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    toggleType();
+  });
 </script>
 </head>
+
 <body>
-<div class="phone">
-    <h2>編輯題目</h2>
+  <div class="phone">
+    <div class="bg"></div>
 
-    <form id="question-form">
-        
-        <input type="text" id="question-name" class="input-field" placeholder="題目名稱">
+    <button class="back-top" type="button" onclick="goBack()" aria-label="返回"></button>
 
-        <select id="question-type" class="input-field">
-            <option value="open">開放式問題</option>
-            <option value="choice">多選題 (勾選題)</option> 
-        </select>
+    <!-- ✅ 表單輸入：位置已對齊背景框 -->
+    <div class="form-area">
+      <div class="input-wrap select-wrap">
+        <select id="question-type" onchange="toggleType()">
+          <option value="open">OPEN</option>
+          <option value="choice">CHOICE</option>
+        </select>
+      </div>
 
-        <div id="open-fields" class="open-field-container">
-            <input type="text" id="question-text" class="input-field" placeholder="輸入題目">
-            <input type="text" id="question-keyword" class="input-field" placeholder="輸入關鍵字 (Key word)">
-        </div>
-        
-        <div id="choice-fields" class="choice-field">
-            
-            <div class="option-row">
-                <input type="checkbox" name="is_correct[]" value="A">
-                <input type="text" name="option_text_a" placeholder="選項 A 內容" class="input-field">
-            </div>
+      <div id="open-fields">
+        <div class="input-wrap">
+          <input type="text" id="question" placeholder="" />
+        </div>
 
-            <div class="option-row">
-                <input type="checkbox" name="is_correct[]" value="B">
-                <input type="text" name="option_text_b" placeholder="選項 B 內容" class="input-field">
-            </div>
-            
-            <div class="option-row">
-                <input type="checkbox" name="is_correct[]" value="C">
-                <input type="text" name="option_text_c" placeholder="選項 C 內容" class="input-field">
-            </div>
+        <div class="input-wrap">
+          <input type="text" id="keyword" placeholder="" />
+        </div>
+      </div>
 
-            <div class="option-row">
-                <input type="checkbox" name="is_correct[]" value="D">
-                <input type="text" name="option_text_d" placeholder="選項 D 內容" class="input-field">
-            </div>
+      <div id="choice-fields">
+        <!-- 若你要顯示多選題，再把選項欄位加回來 -->
+      </div>
+    </div>
 
-        </div>
+    <!-- ✅ 草地上方左右箭頭 -->
+    <button class="nav-btn prev" type="button" onclick="prevStep()" aria-label="上一題"></button>
+    <button class="nav-btn next" type="button" onclick="nextStep()" aria-label="下一題"></button>
 
-        <button id="save-button" class="save-btn" onclick="saveQuestion()">儲存</button>
-    </form>
-
-    <button class="back-btn" onclick="goBack()">返回</button>
-    <button class="logout-btn" onclick="logout()">登出</button>
-</div>
+    <!-- ✅ 最底下 DELETE / SAVE -->
+    <button class="btn-img btn-delete" type="button" onclick="deleteQuestion()" aria-label="刪除"></button>
+    <button class="btn-img btn-save" type="button" onclick="saveQuestion()" aria-label="儲存"></button>
+  </div>
 </body>
 </html>

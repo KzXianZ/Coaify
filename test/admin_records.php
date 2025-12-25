@@ -1,136 +1,146 @@
 <?php
-/**
- * 檔案名稱: admin_records.php
- * 描述: 模擬管理員查看遊戲紀錄列表，已將玩家 ID 替換為帳號。
- * 規範: 使用手機外框佈局，底部包含返回和登出按鈕。
- */
-// 由於是前端模擬，這裡不執行 Session 檢查，但預留 PHP 區塊。
+session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+  header('Location: login.php');
+  exit();
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>遊戲紀錄查詢</title>
+<title>RECORDS</title>
+
 <style>
-body { font-family: Arial; margin: 0; }
-.phone {
-    width: 380px;
-    height: 750px; 
-    margin: 20px auto;
-    border: 2px solid #333;
-    border-radius: 20px;
-    position: relative;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-    overflow-y: auto; /* 啟用垂直滾動 */
-}
-/* 列表樣式 */
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    font-size: 14px;
-}
-.data-table th, .data-table td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-}
-.data-table th {
-    background-color: #f0f0f0;
+body{
+  margin:0;
+  background:#eee;
+  font-family: Arial, sans-serif;
 }
 
-/* 底部按鈕樣式 */
-.back-btn, .logout-btn {
-    position: absolute;
-    bottom: 20px;
-    padding: 10px 20px;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+/* 手機外框 */
+.phone{
+  width:380px;
+  height:700px;
+  margin:20px auto;
+  border:2px solid #333;
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;
 }
-.back-btn { left: 20px; background-color: #5bc0de; }
-.logout-btn { right: 20px; background-color: #d9534f; }
+
+/* 整頁背景 */
+.screen{
+  position:absolute;
+  inset:0;
+  background:url("admin_records.png") no-repeat center top;
+  background-size:cover;
+  image-rendering: pixelated;
+}
+
+/* LOGOUT（右上角，沿用 admin.php） */
+.logout-link{
+  position:absolute;
+  top:18px;
+  right:22px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:3px;
+  color:#2c4a7a;
+  background:none;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+
+/* 返回鍵（圖片） */
+.back-btn{
+  position:absolute;
+  top: 115px;      /* 依你的設計圖 */
+  left:44px;
+  width:36px;
+  height:36px;
+  background:url("back_arrow.png") no-repeat center;
+  background-size:contain;
+  border:none;
+  cursor:pointer;
+  padding:0;
+}
+
+/* SEARCH 圖（純背景貼圖） */
+.search-img{
+  position:absolute;
+  top:115px;      /* 跟返回鍵同一列 */
+  left:150px;      /* 依實際圖微調 */
+  width:220px;
+  height:36px;
+  background:url("search.png") no-repeat center;
+  background-size:contain;
+}
+
+/* 遊戲紀錄列表（整張圖） */
+.records-img{
+  position:absolute;
+  top:165px;      /* 列表開始位置 */
+  left:32px;
+  width:316px;
+  height:auto;
+}
+
+/* SAVE 按鈕（圖片，可按但不做事） */
+.save-btn{
+  position:absolute;
+  bottom:150px;
+  left:50%;
+  transform:translateX(-50%);
+  width:220px;
+  height:44px;
+  background:url("save.png") no-repeat center;
+  background-size:contain;
+  border:none;
+  cursor:pointer;
+  padding:0;
+}
+.save-btn:active{
+  transform:translateX(-50%) translateY(2px);
+}
 </style>
+
 <script>
-function goBack(){ window.history.back(); }
-function logout(){ 
-    window.location.href='login.php?action=logout'; }
+function logout(){
+  window.location.href='login.php?action=logout';
+}
+function goAdmin(){
+  window.location.href='admin.php';
+}
 </script>
 </head>
-<body>
-<div class="phone">
-    <h2>🎮 遊戲紀錄查詢</h2>
 
-    <table class="data-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>帳號</th> 
-                <th>分數</th>
-                <th>時間</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>101</td>
-                <td>user_alice</td> <td>9500</td>
-                <td>14:30:05</td>
-            </tr>
-            <tr>
-                <td>102</td>
-                <td>charlie88</td> <td>4120</td>
-                <td>15:10:22</td>
-            </tr>
-            <tr>
-                <td>103</td>
-                <td>boss_bob</td> <td>1200</td>
-                <td>16:00:00</td>
-            </tr>
-            <tr>
-                <td>104</td>
-                <td>user_alice</td> <td>8800</td>
-                <td>17:05:40</td>
-            </tr>
-            <tr>
-                <td>105</td>
-                <td>david007</td> <td>7500</td>
-                <td>17:30:15</td>
-            </tr>
-            <tr>
-                <td>106</td>
-                <td>eva_best</td> <td>500</td>
-                <td>18:00:00</td>
-            </tr>
-            <tr>
-                <td>107</td>
-                <td>charlie88</td> <td>9999</td>
-                <td>19:00:00</td>
-            </tr>
-            <tr>
-                <td>108</td>
-                <td>tarik_cool</td> <td>3200</td>
-                <td>20:00:00</td>
-            </tr>
-            <tr>
-                <td>109</td>
-                <td>henry</td> <td>7000</td>
-                <td>21:00:00</td>
-            </tr>
-            <tr>
-                <td>110</td>
-                <td>frank77</td> <td>6500</td>
-                <td>22:00:00</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <div style="height: 60px;"></div> <button class="back-btn" onclick="goBack()">返回</button>
-    <button class="logout-btn" onclick="logout()">登出</button>
+<body>
+
+<div class="phone">
+  <div class="screen">
+
+    <!-- LOGOUT -->
+    <button class="logout-link" onclick="logout()">LOGOUT</button>
+
+    <!-- 返回 -->
+    <button class="back-btn" onclick="goAdmin()" aria-label="Back"></button>
+
+    <!-- SEARCH（背景圖） -->
+    <div class="search-img"></div>
+
+    <!-- 紀錄列表（整張圖） -->
+    <img src="game_records.png" class="records-img" alt="Game Records">
+
+    <!-- SAVE -->
+    <button class="save-btn" onclick="void(0)" aria-label="Save"></button>
+
+  </div>
 </div>
+
 </body>
 </html>

@@ -1,106 +1,132 @@
 <?php
-/**
- * 檔案名稱: admin.php
- * 描述: 管理員控制面板總覽頁/儀表板。
- * 規範: 檢查 Session 狀態，並採用 home.php 的手機框架樣式與按鈕格式。
- */
 session_start();
 
 // 檢查登入狀態
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    // 雖然登出導向 index.php，但未登入狀態仍應導向 login.php
     header('Location: login.php');
     exit();
 }
-// 假設您在 login.php 設置了 $_SESSION['username']
 ?>
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>管理員 - 儀表板</title>
+
 <style>
-/* ============================================================== */
-/* 複製 home.php 的核心樣式 */
-/* ============================================================== */
-body { font-family: Arial; margin: 0; }
-.phone {
-    width: 380px;
-    height: 700px;
-    margin: 20px auto;
-    border: 2px solid #333;
-    border-radius: 20px;
-    position: relative;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+/* ================= 基本設定 ================= */
+body{
+  margin:0;
+  background:#eee;
+  font-family: Arial, sans-serif;
 }
-.button {
-    display: block;
-    width: 80%;
-    margin: 10px auto;
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    /* 為了讓按鈕有顏色，我們在這裡補充背景和文字顏色 */
-    background-color: #3498db; 
-    color: white;
-    border: none;
+
+/* ================= 手機外框（黑色邊線） ================= */
+.phone{
+  width:380px;
+  height:700px;
+  margin:20px auto;
+  border:2px solid #333;
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;               /* 不超出黑框 */
+  box-sizing:border-box;
+
+  /* 直接使用你給的背景圖 */
+  background:url("admin_back.png") no-repeat center bottom;
+  background-size:cover;
+  image-rendering: pixelated;
+
+  /* ⭐ 核心：用 flex 讓內容置中 */
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
-.button:hover {
-    background-color: #2980b9;
+
+/* ================= LOGOUT（右上角像素風） ================= */
+.logout-link{
+  position:absolute;
+  top:16px;
+  right:18px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:3px;
+  color:#2c4a7a;
+  background:none;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  text-decoration:underline;
+  text-underline-offset:4px;
+  image-rendering: pixelated;
 }
-.logout-btn {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background: #d9534f;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+
+.logout-link:hover{
+  opacity:.85;
 }
-/* ============================================================== */
+
+/* ================= 按鈕群組（正中央） ================= */
+.btns{
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+  transform: translateY(-70px);
+}
+
+/* ================= 圖片按鈕 ================= */
+.img-btn{
+  width:240px;
+  height:48px;
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+  cursor:pointer;
+  image-rendering: pixelated;
+  transition:transform .12s ease;
+}
+
+.img-btn:hover{
+  transform:translateY(-3px);
+}
+
+/* ★ 使用你給的實際檔名 ★ */
+.img-btn.player{
+  background-image:url("admin_button_1.png");
+}
+.img-btn.records{
+  background-image:url("admin_button_2.png");
+}
 </style>
+
 <script>
-// 【修正】登出導向 index.php
-function logout(){ 
-    window.location.href='login.php?action=logout'; }
-// 定義管理頁面所需的導航函式
-function goToRecords(){ 
-    window.location.href='admin_records.php'; 
+function logout(){
+  window.location.href='login.php?action=logout';
 }
-function goToPlayerManagement(){ 
-    window.location.href='player_management.php'; 
+function goToRecords(){
+  window.location.href='admin_records.php';
+}
+function goToPlayerManagement(){
+  window.location.href='player_management.php';
 }
 </script>
 </head>
+
 <body>
+
 <div class="phone">
-    <h2>管理員功能</h2>
-    <p>歡迎您，<?= htmlspecialchars($_SESSION['username'] ?? '管理者') ?>！</p>
-    
-    <hr>
-    
-    <button class="button" onclick="goToRecords()">
-        🎮 遊戲紀錄查詢
-    </button>
-    
-    <button class="button" onclick="goToPlayerManagement()">
-        👤 玩家資料修改
-    </button>
 
-    <hr>
+  <!-- LOGOUT -->
+  <button class="logout-link" onclick="logout()">LOGOUT</button>
 
-    <button class="logout-btn" onclick="logout()">登出</button>
+  <!-- 按鈕（直接在背景上） -->
+  <div class="btns">
+    <div class="img-btn player" onclick="goToPlayerManagement()"></div>
+    <div class="img-btn records" onclick="goToRecords()"></div>
+  </div>
+
 </div>
+
 </body>
 </html>
