@@ -5,7 +5,7 @@ $error_message = '';
 // 處理登出
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     session_destroy();
-    header('Location: login.php');
+    header('Location: index.php');
     exit();
 }
 

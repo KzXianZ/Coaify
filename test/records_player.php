@@ -157,7 +157,7 @@
 <script>
 function goBack(){ window.location.href='player.php'; }
 
-function logout(){ window.location.href='home.php'; }
+function logout(){ window.location.href='login.php?action=logout'; }
 
 function filterRecords(){
   const search = document.getElementById('search').value.toLowerCase();

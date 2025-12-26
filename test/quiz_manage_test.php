@@ -269,9 +269,7 @@ body {
 </style>
 <script>
 function goBack(){ window.history.back(); }
-function logout(){ window.location.href='index.php'; 
-     window.location.href='login.php?action=logout';
-}
+function logout(){ window.location.href='login.php?action=logout'; }
 
 function editQuestion(q){
     window.location.href = 'edit_question.php?q=' + q;

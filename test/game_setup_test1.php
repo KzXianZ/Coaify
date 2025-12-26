@@ -256,7 +256,7 @@
 
 <script>
     let selectedMode = '個人';
-    function logout() { window.location.href = 'index.php'; }
+    function logout(){ window.location.href='login.php?action=logout'; }
     function goBack() {
         const setup = document.getElementById('setup-area');
         const qr = document.getElementById('qr-display');
