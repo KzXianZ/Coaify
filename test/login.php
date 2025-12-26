@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CORIFY LOGIN</title>
+    <title>COAIFY LOGIN</title>
     <style>
         /* 1. 基礎設定與背景 (與 index.php 相同) */
         body {
@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="phone-container">
         
-        <div class="title">CORIFY</div>
+        <div class="title">COAIFY</div>
 
         <div class="login-container">
             <form method="POST">
