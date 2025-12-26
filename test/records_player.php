@@ -155,7 +155,7 @@
 </style>
 
 <script>
-function goBack(){ window.history.back(); }
+function goBack(){ window.location.href='player.php'; }
 
 function logout(){ window.location.href='home.php'; }
 
