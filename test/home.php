@@ -4,6 +4,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: login.php');
     exit();
 }
+if (isset($_SESSION['msg'])) {
+    echo "<script>alert('" . $_SESSION['msg'] . "');</script>";
+    unset($_SESSION['msg']); // 顯示完後刪除，避免重新整理頁面時重複彈出
+}
 ?>
 
 <!DOCTYPE html>
