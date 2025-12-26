@@ -135,12 +135,10 @@
     window.location.href = "records_player.php";
   }
 
-  function logout(){
-    window.location.href = "home.php";
-  }
+  function logout(){ window.location.href='login.php?action=logout'; }
 
   function goHome(){
-    window.location.href = "index.php";
+    window.location.href = "home.php";
   }
 
   function downloadMistakes(){

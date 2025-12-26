@@ -114,9 +114,7 @@
 </style>
 
 <script>
-  function logout(){
-    window.location.href="home.php";
-  }
+  function logout(){ window.location.href='login.php?action=logout'; }
 
   function goBack(){
     window.location.href="records_player_test1.php";

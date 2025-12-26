@@ -134,8 +134,8 @@
 
   .back-btn{
     position:absolute;
-    left:48px;
-    bottom:163px;
+    left:18px;
+    bottom:40px;
     width:40px;
     height:40px;
     border-radius:50%;
