@@ -30,6 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   /* 讓像素圖縮放不糊 */
   *{ image-rendering: pixelated; image-rendering: crisp-edges; }
 
+  /* ✅ 外框：參照 index.php 的手機邊框（不改動內部尺寸/定位） */
+.phone, .screen{
+  outline: 8px solid #222;      /* 不影響原本寬高 */
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
   /* ✅ 這個就是你原本 table 裡的「手機畫面」：固定 360x720 不放大 */
   .screen{
     width: 360px;
