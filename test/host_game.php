@@ -164,7 +164,7 @@
     </div>
 
     <div class="footer-group">
-        <div class="back-btn" onclick="location.href='host.php'">←</div>
+        <div class="back-btn" onclick="location.href='home.php'">←</div>
         <button id="next-btn" class="next-btn disabled" onclick="nextStep()">NEXT STEP</button>
     </div>
 </div>
