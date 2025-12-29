@@ -6,9 +6,9 @@ session_start();
 $is_logged_in = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 
 // 假設這裡從 URL 參數或 Session 取得遊戲結果
-$score = 90; 
+$score = 50; 
 $damage = 5500;
-$time = "1.8HR";
+$time = "1.5 mins";
 ?>
 
 <!DOCTYPE html>
