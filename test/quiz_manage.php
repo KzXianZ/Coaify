@@ -238,8 +238,7 @@ body {
 </style>
 <script>
 function createQuiz(){ window.location.href='create_quiz.php'; }
-function logout(){ window.location.href = 'login.php'; 
-     window.location.href='login.php?action=logout';
+function logout(){ window.location.href='login.php?action=logout';
 }
 function goBack(){ window.location.href='home.php'; } // 修正返回首頁
 function goToQuiz(){ window.location.href='quiz_manage_test.php'; }

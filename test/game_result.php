@@ -119,8 +119,8 @@ h2 {
 
 </style>
 <script>
-function goRegister(){ window.location.href='register.php'; }
-function goLogin(){ window.location.href='login.php'; }
+function goRegister(){ window.location.href='register_save_records.php'; }
+function goLogin(){ window.location.href='login_save_records.php'; }
 function goIndex(){ window.location.href='index.php'; }
 function saveRecordAndGoHome(){
     alert('成績已儲存！'); 

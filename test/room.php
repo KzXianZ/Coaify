@@ -23,6 +23,14 @@
     background: url("room_background.png") no-repeat;
     background-size: 100% 100%; /* 把原圖縮到 360x720，不放大頁面 */
   }
+  
+  /* ✅ 外框：參照 index.php 的手機邊框（不改動內部尺寸/定位） */
+.phone, .screen{
+  outline: 8px solid #222;      /* 不影響原本寬高 */
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
 
   /* ✅ 右上角登出 */
   .logout{

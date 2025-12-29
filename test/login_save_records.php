@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     } elseif ($account === 'user' && $password === '123') {
         $_SESSION['logged_in'] = true;
+        $_SESSION['msg'] = '紀錄已儲存！';
         header('Location: home.php');
         exit();
     } else {
@@ -35,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COAIFY LOGIN</title>
     <style>
-        /* 1. 基礎設定與背景 */
+        /* 1. 基礎設定與背景 (與 index.php 相同) */
         body {
             margin: 0;
             padding: 0;
@@ -43,11 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #ffffffff; 
+            background-color: #ffffffff; /* 外圍背景色改為深色更像手機展示 */
             font-family: 'Courier New', Courier, monospace;
         }
 
-        /* 2. 手機外框容器 */
+        /* 2. 手機外框容器 (完全複製 index.php) */
         .phone-container {
             width: 360px;
             height: 640px;
@@ -66,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         /* 3. 標題樣式 */
         .title {
-            margin-top: 60px;
+            margin-top: 60px; /* 配合手機框調整高度 */
             font-size: 50px;
             color: white;
             text-align: center;
@@ -75,16 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: bold;
         }
 
-        /* 4. 登入對話框 */
+        /* 4. 登入對話框 (白框部分) */
         .login-container {
-            width: 310px;
+            width: 310px; /* 縮小一點以符合手機框寬度 */
             background: url('login.png') no-repeat center;
             background-size: 100% 100%;
             padding: 30px 20px;
             text-align: left;
             margin-top: 20px;
             box-sizing: border-box;
-            z-index: 5;
         }
 
         .label {
@@ -96,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 14px;
         }
 
+        /* 輸入框樣式 */
         input[type="text"], input[type="password"] {
             width: 100%;
             height: 35px;
@@ -110,6 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #333;
         }
 
+        /* 忘記密碼連結 */
         .forget {
             text-align: right;
             font-size: 11px;
@@ -121,12 +123,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 15px;
         }
 
+        /* 按鈕容器 */
         .btn-group {
             display: flex;
             justify-content: space-between;
             gap: 10px;
         }
 
+        /* 按鈕樣式 (藍色小按鈕) */
         .pixel-btn {
             width: 48%;
             height: 45px;
@@ -153,40 +157,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 12px;
             margin-top: 5px;
         }
-
-        /* 5. 返回按鈕樣式 */
-        .footer-back {
-            position: absolute;
-            bottom: 40px; /* 放在草地位置上方 */
-            left: 25px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .back-circle {
-            width: 40px;
-            height: 40px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #4a8eb3;
-            font-size: 24px;
-            font-weight: bold;
-            border: 2px solid #4a8eb3;
-            box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-        }
-
-        .back-text {
-            color: white;
-            margin-left: 10px;
-            font-weight: bold;
-            font-size: 14px;
-            text-shadow: 2px 2px #000;
-        }
     </style>
 </head>
 <body>
@@ -211,14 +181,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="btn-group">
                     <button type="submit" class="pixel-btn">LOGIN</button>
-                    <a href="register.php" class="pixel-btn">REGISTER</a>
+                    <a href="register_save_records.php" class="pixel-btn">REGISTER</a>
                 </div>
             </form>
-        </div>
-
-        <div class="footer-back" onclick="location.href='index.php'">
-            <div class="back-circle">←</div>
-            <span class="back-text"></span>
         </div>
 
     </div>

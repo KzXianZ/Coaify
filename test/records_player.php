@@ -26,6 +26,14 @@
     background-size: 100% 100%;
   }
 
+  /* ✅ 外框：參照 index.php 的手機邊框（不改動內部尺寸/定位） */
+.phone, .screen{
+  outline: 8px solid #222;      /* 不影響原本寬高 */
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+
   .logout-link{
     position:absolute;
     top:12px;
@@ -134,8 +142,8 @@
 
   .back-btn{
     position:absolute;
-    left:48px;
-    bottom:163px;
+    left:18px;
+    bottom:40px;
     width:40px;
     height:40px;
     border-radius:50%;
@@ -155,7 +163,7 @@
 </style>
 
 <script>
-function goBack(){ window.history.back(); }
+function goBack(){ window.location.href='player.php'; }
 
 function logout(){ window.location.href='home.php'; }
 
@@ -213,16 +221,12 @@ function goToRecordByIndex(index){
           <div class="titleLine">SAD QUIZ-2 (89/100)</div>
           <div class="subLine">2025.11.20 (1.5HR)</div>
         </div>
-        <button class="arrowBtn" onclick="goToRecordByIndex(3)" aria-label="open record 3"></button>
       </div>
 
       <div class="record-btn">
         <div class="recordText">
           <div class="titleLine">MIS QUIZ-1 <span class="scoreRed">(58/100)</span></div>
           <div class="subLine">2025.11.28 (1.2HR)</div>
-        </div>
-        <button class="arrowBtn" onclick="goToRecordByIndex(4)" aria-label="open record 4"></button>
-      </div>
     </div>
   </div>
 

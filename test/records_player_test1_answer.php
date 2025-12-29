@@ -22,6 +22,13 @@
     position:relative;
   }
 
+  /* ✅ 外框：參照 index.php 的手機邊框（不改動內部尺寸/定位） */
+.phone, .screen{
+  outline: 8px solid #222;      /* 不影響原本寬高 */
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
   .logout{
     position:absolute;
     top:12px;
@@ -114,9 +121,7 @@
 </style>
 
 <script>
-  function logout(){
-    window.location.href="home.php";
-  }
+  function logout(){ window.location.href='login.php?action=logout'; }
 
   function goBack(){
     window.location.href="records_player_test1.php";
