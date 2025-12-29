@@ -133,7 +133,7 @@
     }
 </style>
 <script>
-function goBack(){ window.history.back(); }
+function goBack(){window.location.href = 'admin.php';}
 function logout(){ window.location.href='login.php?action=logout'; }
 function editPlayer(id){
     window.location.href = `player_edit.php?id=${id}`; 
