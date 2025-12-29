@@ -26,7 +26,7 @@ body{
 .phone{
   width:360px;
   height:720px;
-  border:2px solid #222;
+  border:8px solid #222;
   border-radius:22px;
   overflow:hidden;
   position:relative;
