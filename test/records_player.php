@@ -202,7 +202,7 @@ function goToRecordByIndex(index){
     <div class="list">
       <div class="record-btn">
         <div class="recordText">
-          <div class="titleLine">SAD QUIZ-1 (72/100)</div>
+          <div class="titleLine">Test 1 (50/100)</div>
           <div class="subLine">2025.11.15 (1.25HR)</div>
         </div>
         <button class="arrowBtn" onclick="goToRecordByIndex(1)" aria-label="open record 1"></button>
@@ -215,19 +215,6 @@ function goToRecordByIndex(index){
         </div>
         <button class="arrowBtn" onclick="goToRecordByIndex(2)" aria-label="open record 2"></button>
       </div>
-
-      <div class="record-btn">
-        <div class="recordText">
-          <div class="titleLine">SAD QUIZ-2 (89/100)</div>
-          <div class="subLine">2025.11.20 (1.5HR)</div>
-        </div>
-      </div>
-
-      <div class="record-btn">
-        <div class="recordText">
-          <div class="titleLine">MIS QUIZ-1 <span class="scoreRed">(58/100)</span></div>
-          <div class="subLine">2025.11.28 (1.2HR)</div>
-    </div>
   </div>
 
   <button class="back-btn" onclick="goBack()"><span>←</span></button>

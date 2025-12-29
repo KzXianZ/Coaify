@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>紀錄 - SAD QUIZ-1</title>
+<title>紀錄 - Test 1</title>
 
 <style>
   *{ image-rendering: pixelated; image-rendering: crisp-edges; }
@@ -19,7 +19,7 @@
     overflow:hidden;
     box-sizing:border-box;
 
-    background: url("SAD_QUIZ.png") no-repeat;
+    background: url("Test1.png") no-repeat;
     background-size: 100% 100%;
   }
 
@@ -92,7 +92,7 @@
     height:44px;
     left:50%;
     transform:translateX(-50%);
-    top:535px;
+    top:580px;
     background-image:url("check_answer.png");
   }
 
