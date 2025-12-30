@@ -159,7 +159,7 @@ $qr_api_url = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=2a
 <script>
     function goBack(){
         // 設定返回首頁
-        window.location.href='player.php'; 
+        window.location.href='index.php'; 
     }
 </script>
 </head>
